@@ -105,12 +105,8 @@ public class Game : MonoBehaviour
 
 	private void FadeArrowButtons() 
 	{
-		if (arrowLeft.color.a > 0)
-		{
-			Color color = new Color(arrowLeft.color.r, arrowLeft.color.g, arrowLeft.color.b, arrowLeft.color.a - 0.1f);
-			arrowLeft.color = color;
-			arrowRight.color = color;
-		}
+		arrowLeft.CrossFadeAlpha(0, 5, false);
+		arrowRight.CrossFadeAlpha(0, 5, false);
 	}
 
 //    private void SpawnBoat()
