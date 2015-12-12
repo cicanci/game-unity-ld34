@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class Game : MonoBehaviour
+public class Game : MonoBehaviour 
 {
     public static Game instance;
 
     public GameObject spock;
+	public Image arrowLeft;
+	public Image arrowRight;
 //    public GameObject boatPrefab;
 //    public float spawnDelay;
 //    public Text currentScoreText;
@@ -20,8 +22,8 @@ public class Game : MonoBehaviour
 //    private int currentScore;
 //    private bool gameOver;
 
-    void Start()
-    {
+    void Start() 
+	{
         instance = this;
 
         buttonLeft = new MoveLeftCommand();
@@ -36,54 +38,80 @@ public class Game : MonoBehaviour
 //        SetHighScore();
     }
 
-    void Update()
-    {
+    void Update() 
+	{
 	#if UNITY_ANDROID || UNITY_IOS
 		HandleMobileInput();
 	#else
 		HandleDesktopInput();
 	#endif
-
 //        SpawnBoat();
     }
 
 	private bool touchPressed = false;
 
-	private void HandleMobileInput() {
-		if (Input.touchCount > 0) {
-			if (Input.GetTouch(0).phase == TouchPhase.Began) {
+	private void HandleMobileInput() 
+	{
+		if (Input.touchCount > 0) 
+		{
+			if (Input.GetTouch(0).phase == TouchPhase.Began) 
+			{
 				touchPressed = true;
+				FadeArrowButtons();
 			}
-			else if (Input.GetTouch(0).phase == TouchPhase.Ended) {
+			else if (Input.GetTouch(0).phase == TouchPhase.Ended) 
+			{
 				touchPressed = false;
 			}
-			else if (touchPressed) {
-				if (Input.GetTouch(0).position.x > (Screen.width * 0.5f)) {
+			else if (touchPressed) 
+			{
+				if (Input.GetTouch(0).position.x > (Screen.width * 0.5f)) 
+				{
 					buttonRight.Execute(spock);
 				}
-				else {
+				else 
+				{
 					buttonLeft.Execute(spock);
 				}
 			}
 		}
-		else {
+		else 
+		{
 			touchPressed = false;
 		}
 	}
 
-	private void HandleDesktopInput()
-    {
-		if (Input.GetMouseButton(0)) {
+	private void HandleDesktopInput() 
+	{
+		if (Input.GetMouseButtonDown(0)) 
+		{
+			FadeArrowButtons();
+		}
+
+		if (Input.GetMouseButton(0)) 
+		{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-			if (ray.origin.x > 0) {
+			if (ray.origin.x > 0) 
+			{
 				buttonRight.Execute(spock);
 			}
-			else {
+			else 
+			{
 				buttonLeft.Execute(spock);
 			}
 		}
     }
+
+	private void FadeArrowButtons() 
+	{
+		if (arrowLeft.color.a > 0)
+		{
+			Color color = new Color(arrowLeft.color.r, arrowLeft.color.g, arrowLeft.color.b, arrowLeft.color.a - 0.1f);
+			arrowLeft.color = color;
+			arrowRight.color = color;
+		}
+	}
 
 //    private void SpawnBoat()
 //    {
