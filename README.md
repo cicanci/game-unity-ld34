@@ -1,2 +1,3 @@
-# game-unity-ld34
-Game developed during the Ludum Dare #34 - Growing, Two button controls
+Game developed for the Ludum Dare #34 - Growing, Two button controls
+
+More info: http://ludumdare.com/compo/ludum-dare-34/?action=preview&uid=52021
