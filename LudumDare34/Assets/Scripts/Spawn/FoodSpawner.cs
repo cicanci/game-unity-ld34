@@ -34,7 +34,7 @@ public class FoodSpawner : MonoBehaviour
 
 		if (food != null) 
 		{
-			Vector3 pixelPosition = new Vector3(Random.Range(0, Screen.width), Screen.height, 0);
+			Vector3 pixelPosition = new Vector3(Random.Range(50, Screen.width - 50), Screen.height + 50, 0);
 			Vector3 pointPosition = Camera.main.ScreenToWorldPoint(pixelPosition);
 			pointPosition.z = 0;
 

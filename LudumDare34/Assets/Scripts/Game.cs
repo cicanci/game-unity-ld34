@@ -111,8 +111,8 @@ public class Game : MonoBehaviour
 
 	private void FadeArrowButtons() 
 	{
-		arrowLeft.CrossFadeAlpha(0, 5, false);
-		arrowRight.CrossFadeAlpha(0, 5, false);
+		arrowLeft.CrossFadeAlpha(0, 10, false);
+		arrowRight.CrossFadeAlpha(0, 10, false);
 	}
 
     private void SpawnFood()

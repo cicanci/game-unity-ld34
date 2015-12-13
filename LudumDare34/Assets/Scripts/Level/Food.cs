@@ -9,7 +9,7 @@ public class Food : Character
 
 		Vector3 pixelPosition = Camera.main.WorldToScreenPoint(this.gameObject.transform.localPosition);
 
-		if (pixelPosition.y < 0) 
+		if (pixelPosition.y < -50) 
 		{
 			Destroy(this.gameObject);
 		}
