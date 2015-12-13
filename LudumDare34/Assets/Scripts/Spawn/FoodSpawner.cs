@@ -9,33 +9,39 @@ public class FoodSpawner : MonoBehaviour
 	private Spawner broccoliSpawner;
 	private Spawner pizzaSpawner;
 
-	private int broccoliCount;
-	private int pizzaCount;
-
 	void Start() 
 	{
 		broccoliSpawner = new Spawner(broccoli);
 		pizzaSpawner = new Spawner(pizza);
-
-		broccoliCount = 0;
-		pizzaCount = 0;
 	}
 
 	public GameObject SpawnFoodRandom()
 	{
-		Debug.Log(string.Format("Pizza: {0} Broccoli: {1}", pizzaCount, broccoliCount));
+		GameObject food = null;
 
 		switch (Random.Range(0, 2))
 		{
 		case 0:
-			broccoliCount++;
-			return broccoliSpawner.SpawnObject();
+			food = broccoliSpawner.SpawnObject();
+			break;
 		case 1:
-			pizzaCount++;
-			return pizzaSpawner.SpawnObject();
+			food = pizzaSpawner.SpawnObject();
+			break;
 		default:
-			return null;
+			food = null;
+			break;
 		}
+
+		if (food != null) 
+		{
+			Vector3 pixelPosition = new Vector3(Random.Range(0, Screen.width), Screen.height, 0);
+			Vector3 pointPosition = Camera.main.ScreenToWorldPoint(pixelPosition);
+			pointPosition.z = 0;
+
+			food.transform.localPosition = pointPosition;
+		}
+
+		return food;
 	}
 
 }

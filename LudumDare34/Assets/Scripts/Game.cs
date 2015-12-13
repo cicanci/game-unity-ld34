@@ -115,10 +115,7 @@ public class Game : MonoBehaviour
 
         if (spawnCount >= spawnDelay)
         {
-			Vector3 position = new Vector3(0, 7, 0);
-
-			GameObject food = GetComponent<FoodSpawner>().SpawnFoodRandom();
-            food.transform.localPosition = position;
+			GetComponent<FoodSpawner>().SpawnFoodRandom();
             spawnCount = 0;
         }
     }
