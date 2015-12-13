@@ -33,6 +33,8 @@ public class Game : MonoBehaviour
 
 //        AddScore(0);
 //        SetHighScore();
+
+		FadeArrowButtons();
     }
 
     void Update() 
@@ -80,11 +82,6 @@ public class Game : MonoBehaviour
 
 	private void HandleDesktopInput() 
 	{
-		if (Input.GetMouseButtonDown(0)) 
-		{
-			FadeArrowButtons();
-		}
-
 		if (Input.GetMouseButton(0)) 
 		{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -96,6 +93,18 @@ public class Game : MonoBehaviour
 			else 
 			{
 				buttonLeft.Execute(spock);
+			}
+		}
+		else
+		{
+			if (Input.GetKey(KeyCode.LeftArrow))
+			{
+				buttonLeft.Execute(spock);
+			}
+
+			if (Input.GetKey(KeyCode.RightArrow))
+			{
+				buttonRight.Execute(spock);
 			}
 		}
     }
