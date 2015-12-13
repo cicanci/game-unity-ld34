@@ -8,8 +8,7 @@ public class Game : MonoBehaviour
     public GameObject spock;
 	public Image arrowLeft;
 	public Image arrowRight;
-//    public GameObject boatPrefab;
-//    public float spawnDelay;
+    public float spawnDelay;
 //    public Text currentScoreText;
 //    public Text highScoreText;
 //    public GameObject gameOverPanel;
@@ -17,8 +16,7 @@ public class Game : MonoBehaviour
 
     private Command buttonLeft;
     private Command buttonRight;
-//    private Spawner spawner;
-//    private float spawnCount;
+    private float spawnCount;
 //    private int currentScore;
 //    private bool gameOver;
 
@@ -29,8 +27,7 @@ public class Game : MonoBehaviour
         buttonLeft = new MoveLeftCommand();
         buttonRight = new MoveRightCommand();
 
-//		spawner = new Spawner(boatPrefab);
-//        spawnCount = 0;
+        spawnCount = 0;
 //        currentScore = 0;
 //        gameOver = false;
 
@@ -45,7 +42,7 @@ public class Game : MonoBehaviour
 	#else
 		HandleDesktopInput();
 	#endif
-//        SpawnBoat();
+		SpawnFood();
     }
 
 	private bool touchPressed = false;
@@ -109,41 +106,23 @@ public class Game : MonoBehaviour
 		arrowRight.CrossFadeAlpha(0, 5, false);
 	}
 
-//    private void SpawnBoat()
-//    {
-//        if (spawnCount < spawnDelay)
-//        {
-//            spawnCount += Time.deltaTime;
-//        }
-//
-//        if (spawnCount >= spawnDelay)
-//        {
-//            Vector3 position = Vector3.zero;
-//
-//            switch (Random.Range(0, 4))
-//            {
-//                case 0:
-//                    position = new Vector3(Random.Range(-10, 10), 7, 0);
-//                    break;
-//                case 1:
-//                    position = new Vector3(Random.Range(-10, 10), -7, 0);
-//                    break;
-//                case 2:
-//                    position = new Vector3(10, Random.Range(-7, 7), 0);
-//                    break;
-//                case 3:
-//                    position = new Vector3(-10, Random.Range(-7, 7), 0);
-//                    break;
-//                default:
-//                    break;
-//            }
-//
-//            GameObject boat = boatSpawner.SpawnObject();
-//            boat.transform.localPosition = position;
-//            spawnCount = 0;
-//        }
-//    }
-//
+    private void SpawnFood()
+    {
+        if (spawnCount < spawnDelay)
+        {
+            spawnCount += Time.deltaTime;
+        }
+
+        if (spawnCount >= spawnDelay)
+        {
+			Vector3 position = new Vector3(0, 7, 0);
+
+			GameObject food = GetComponent<FoodSpawner>().SpawnFoodRandom();
+            food.transform.localPosition = position;
+            spawnCount = 0;
+        }
+    }
+
 //    private void SetHighScore()
 //    {
 //        highScoreText.text = "High Score: " + PlayerPrefs.GetInt("HighScore");
