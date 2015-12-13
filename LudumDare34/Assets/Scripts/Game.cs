@@ -153,10 +153,6 @@ public class Game : MonoBehaviour
         {
 			spawnDelay -= spawnDelayIncrement;
         }
-		else 
-		{
-			spawnDelay = 1;
-		}
 
 		Debug.Log("Score: " + currentScore);
     }

@@ -39,7 +39,10 @@ public class Spock : Character
 				Debug.Log("Still healphy");
 			}
 
-			speed -= speedIncrement;
+			if (speed > speedIncrement) 
+			{
+				speed -= speedIncrement;
+			}
 		}
 
 		Destroy(other.gameObject);
@@ -50,7 +53,7 @@ public class Spock : Character
         float left = Camera.main.ViewportToWorldPoint(Vector3.zero).x;
         float right = Camera.main.ViewportToWorldPoint(Vector3.one).x;
         float top = Camera.main.ViewportToWorldPoint(Vector3.zero).y;
-        float bottom = Camera.main.ViewportToWorldPoint(Vector3.one).y;
+//        float bottom = Camera.main.ViewportToWorldPoint(Vector3.one).y;
 
         float x = gameObject.transform.position.x;
         float y = gameObject.transform.position.y;
