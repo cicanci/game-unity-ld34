@@ -2,6 +2,43 @@
 
 public class Spock : Character
 {
+	public float speedIncrement;
+	public float scaleIncrement;
+
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		Debug.Log("ENTER: " + other.tag);
+
+		Food food = other.gameObject.GetComponent<Food>();
+
+		if (food.isGood)
+		{
+			Game.instance.AddScore(food.score);
+		}
+		else 
+		{
+			Vector3 newScale = new Vector3(scaleIncrement, scaleIncrement, scaleIncrement);
+			gameObject.transform.localScale += newScale;
+
+			Sprite sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+			Vector2 spriteSize = new Vector2(sprite.bounds.size.x * sprite.pixelsPerUnit * gameObject.transform.localScale.x, 
+				sprite.bounds.size.y * sprite.pixelsPerUnit * gameObject.transform.localScale.y);
+
+			if (spriteSize.x > Screen.width - 50)
+			{
+				Debug.Log("TO BIG!");
+			}
+			else if (spriteSize.x > Screen.width * 0.5f)
+			{
+				Debug.Log("Its growing...");
+			}
+
+			speed -= speedIncrement;
+		}
+
+		Destroy(other.gameObject);
+	}
+
     void LateUpdate()
     {
         float left = Camera.main.ViewportToWorldPoint(Vector3.zero).x;

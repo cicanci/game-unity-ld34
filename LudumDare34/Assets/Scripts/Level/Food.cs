@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Food : Character 
 {
+	public bool isGood;
+
 	void Update () 
 	{
 		MoveDown();

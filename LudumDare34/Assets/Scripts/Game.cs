@@ -9,15 +9,15 @@ public class Game : MonoBehaviour
 	public Image arrowLeft;
 	public Image arrowRight;
     public float spawnDelay;
+	public float spawnDelayIncrement;
 //    public Text currentScoreText;
 //    public Text highScoreText;
 //    public GameObject gameOverPanel;
-//    public AudioSource music;
 
     private Command buttonLeft;
     private Command buttonRight;
     private float spawnCount;
-//    private int currentScore;
+    private int currentScore;
 //    private bool gameOver;
 
     void Start() 
@@ -82,6 +82,11 @@ public class Game : MonoBehaviour
 
 	private void HandleDesktopInput() 
 	{
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			PauseGame();
+		}
+
 		if (Input.GetMouseButton(0)) 
 		{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -133,39 +138,41 @@ public class Game : MonoBehaviour
 //    {
 //        highScoreText.text = "High Score: " + PlayerPrefs.GetInt("HighScore");
 //    }
-//
-//    public void AddScore(int points)
-//    {
-//        currentScore += points;
+
+    public void AddScore(int points)
+    {
+        currentScore += points;
 //        if (currentScoreText != null)
 //        {
 //            currentScoreText.text = currentScore.ToString();
 //        }
-//
-//        // This makes the game more intersting
-//        spawnDelay -= Time.deltaTime;
-//        monster.GetComponent<Character>().speed -= Time.deltaTime;
-//
-//        if (spawnDelay < 0)
-//        {
-//            spawnDelay = 0;
-//        }
-//    }
-//
-//    private void PauseGame()
-//    {
-//        if (Time.timeScale != 0)
-//        {
-//            Time.timeScale = 0;
-//        }
-//        else
-//        {
-//            Time.timeScale = 1;
-//        }
-//
-//        Debug.Log(Time.timeScale);
-//    }
-//
+
+		spawnDelay -= spawnDelayIncrement;
+
+		if (spawnDelay >= spawnDelayIncrement)
+        {
+			spawnDelay -= spawnDelayIncrement;
+        }
+		else 
+		{
+			spawnDelay = spawnDelayIncrement;
+		}
+
+		Debug.Log("Score: " + currentScore);
+    }
+
+    private void PauseGame()
+    {
+        if (Time.timeScale != 0)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+    }
+
 //    public void GameOver()
 //    {
 //        if (!gameOver)
@@ -183,11 +190,5 @@ public class Game : MonoBehaviour
 //            music.Stop();
 //            PlaySound("GameOver");
 //        }
-//    }
-//
-//    public void PlaySound(string pFileName)
-//    {
-//        AudioClip audioClip = Resources.Load<AudioClip>(pFileName);
-//        GetComponent<AudioSource>().PlayOneShot(audioClip);
 //    }
 }
