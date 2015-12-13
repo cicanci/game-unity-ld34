@@ -18,7 +18,8 @@ public class Game : MonoBehaviour
     private Command buttonRight;
     private float spawnCount;
     private int currentScore;
-//    private bool gameOver;
+    private bool gameOver;
+	private bool touchPressed;
 
     void Start() 
 	{
@@ -28,13 +29,16 @@ public class Game : MonoBehaviour
         buttonRight = new MoveRightCommand();
 
         spawnCount = 0;
-//        currentScore = 0;
-//        gameOver = false;
+        currentScore = 0;
+        gameOver = false;
+		touchPressed = false;
 
 //        AddScore(0);
 //        SetHighScore();
 
 		FadeArrowButtons();
+
+		Debug.Log("High Score: " + PlayerPrefs.GetInt("HighScore"));
     }
 
     void Update() 
@@ -46,8 +50,6 @@ public class Game : MonoBehaviour
 	#endif
 		SpawnFood();
     }
-
-	private bool touchPressed = false;
 
 	private void HandleMobileInput() 
 	{
@@ -147,15 +149,13 @@ public class Game : MonoBehaviour
 //            currentScoreText.text = currentScore.ToString();
 //        }
 
-		spawnDelay -= spawnDelayIncrement;
-
-		if (spawnDelay >= spawnDelayIncrement)
+		if (spawnDelay > 1)
         {
 			spawnDelay -= spawnDelayIncrement;
         }
 		else 
 		{
-			spawnDelay = spawnDelayIncrement;
+			spawnDelay = 1;
 		}
 
 		Debug.Log("Score: " + currentScore);
@@ -173,22 +173,19 @@ public class Game : MonoBehaviour
         }
     }
 
-//    public void GameOver()
-//    {
-//        if (!gameOver)
-//        {
-//            gameOver = true;
-//
-//            PauseGame();
-//            gameOverPanel.SetActive(true);
-//
-//            if (currentScore > PlayerPrefs.GetInt("HighScore"))
-//            {
-//                PlayerPrefs.SetInt("HighScore", currentScore);
-//            }
-//
-//            music.Stop();
-//            PlaySound("GameOver");
-//        }
-//    }
+    public void GameOver()
+    {
+        if (!gameOver)
+        {
+            gameOver = true;
+
+            PauseGame();
+            //gameOverPanel.SetActive(true);
+
+            if (currentScore > PlayerPrefs.GetInt("HighScore"))
+            {
+                PlayerPrefs.SetInt("HighScore", currentScore);
+            }
+        }
+    }
 }

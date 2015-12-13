@@ -24,13 +24,19 @@ public class Spock : Character
 			Vector2 spriteSize = new Vector2(sprite.bounds.size.x * sprite.pixelsPerUnit * gameObject.transform.localScale.x, 
 				sprite.bounds.size.y * sprite.pixelsPerUnit * gameObject.transform.localScale.y);
 
-			if (spriteSize.x > Screen.width - 50)
+			if (spriteSize.x > Screen.width * 0.8f)
 			{
 				Debug.Log("TO BIG!");
+				Game.instance.GameOver();
 			}
-			else if (spriteSize.x > Screen.width * 0.5f)
+			else if (spriteSize.x > Screen.width * 0.3f)
 			{
 				Debug.Log("Its growing...");
+				enableRotation = true;
+			}
+			else 
+			{
+				Debug.Log("Still healphy");
 			}
 
 			speed -= speedIncrement;
@@ -58,14 +64,14 @@ public class Spock : Character
             x = right - gameObject.GetComponent<Renderer>().bounds.extents.x;
         }
 
-        if (gameObject.transform.position.y <= top + gameObject.GetComponent<Renderer>().bounds.extents.y)
-        {
-            y = top + gameObject.GetComponent<Renderer>().bounds.extents.y;
-        }
-        else if (gameObject.transform.position.y >= bottom - gameObject.GetComponent<Renderer>().bounds.extents.y)
-        {
-            y = bottom - gameObject.GetComponent<Renderer>().bounds.extents.y;
-        }
+//        if (gameObject.transform.position.y <= top + gameObject.GetComponent<Renderer>().bounds.extents.y)
+//        {
+//            y = top + gameObject.GetComponent<Renderer>().bounds.extents.y;
+//        }
+//        else if (gameObject.transform.position.y >= bottom - gameObject.GetComponent<Renderer>().bounds.extents.y)
+//        {
+//            y = bottom - gameObject.GetComponent<Renderer>().bounds.extents.y;
+//        }
 
         gameObject.transform.position = new Vector3(x, y, gameObject.transform.position.z);
     }
