@@ -10,7 +10,7 @@ public class Game : MonoBehaviour
 	public Image arrowRight;
     public float spawnDelay;
 	public float spawnDelayIncrement;
-//    public Text currentScoreText;
+    public Text scoreText;
 //    public Text highScoreText;
 //    public GameObject gameOverPanel;
 
@@ -32,9 +32,6 @@ public class Game : MonoBehaviour
         currentScore = 0;
         gameOver = false;
 		touchPressed = false;
-
-//        AddScore(0);
-//        SetHighScore();
 
 		FadeArrowButtons();
 
@@ -144,10 +141,7 @@ public class Game : MonoBehaviour
     public void AddScore(int points)
     {
         currentScore += points;
-//        if (currentScoreText != null)
-//        {
-//            currentScoreText.text = currentScore.ToString();
-//        }
+		scoreText.text = "Score: " + currentScore;
 
 		if (spawnDelay > 1)
         {
