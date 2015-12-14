@@ -32,7 +32,7 @@ public class Spock : Character
 			}
 			else if (spriteSize.x > Screen.width * 0.3f)
 			{
-				Game.instance.ShowMessage("Its growing...", Color.yellow);
+				Game.instance.ShowMessage("He is growing...", Color.yellow);
 				enableRotation = true;
 			}
 			else 
