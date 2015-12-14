@@ -26,20 +26,20 @@ public class Spock : Character
 
 			if (spriteSize.x > Screen.width * 0.9f)
 			{
-				Debug.Log("TO BIG!");
+				Game.instance.ShowMessage("Too big! Game Over!", Color.red);
 				Game.instance.GameOver();
 			}
 			else if (spriteSize.x > Screen.width * 0.3f)
 			{
-				Debug.Log("Its growing...");
+				Game.instance.ShowMessage("Its growing...", Color.yellow);
 				enableRotation = true;
 			}
 			else 
 			{
-				Debug.Log("Still healphy");
+				Game.instance.ShowMessage("Still healthy", Color.white);
 			}
 
-			if (speed > speedIncrement) 
+			if (speed > 5) 
 			{
 				speed -= speedIncrement;
 			}

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class Game : MonoBehaviour 
 {
@@ -11,6 +12,8 @@ public class Game : MonoBehaviour
     public float spawnDelay;
 	public float spawnDelayIncrement;
     public Text scoreText;
+	public Text messageText;
+	public List<string> messageList;
 //    public Text highScoreText;
 //    public GameObject gameOverPanel;
 
@@ -33,6 +36,7 @@ public class Game : MonoBehaviour
         gameOver = false;
 		touchPressed = false;
 
+		ShowMessage("Start", Color.green);
 		FadeArrowButtons();
 
 		Debug.Log("High Score: " + PlayerPrefs.GetInt("HighScore"));
@@ -133,10 +137,13 @@ public class Game : MonoBehaviour
         }
     }
 
-//    private void SetHighScore()
-//    {
-//        highScoreText.text = "High Score: " + PlayerPrefs.GetInt("HighScore");
-//    }
+	public void ShowMessage(string message, Color color)
+	{
+		messageText.color = color;
+		messageText.CrossFadeAlpha(1, 0, false);
+		messageText.text = message;
+		messageText.CrossFadeAlpha(0, 3, false);
+	}
 
     public void AddScore(int points)
     {
@@ -147,6 +154,8 @@ public class Game : MonoBehaviour
         {
 			spawnDelay -= spawnDelayIncrement;
         }
+
+		ShowMessage(messageList[Random.Range(0, messageList.Count)], Color.blue);
 
 		Debug.Log("Score: " + currentScore);
     }
