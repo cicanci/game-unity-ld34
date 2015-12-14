@@ -37,7 +37,7 @@ public class Spock : Character
 			}
 			else 
 			{
-				Game.instance.ShowMessage("Still healthy", Color.white);
+				Game.instance.ShowMessage("Still healthy", Color.black);
 			}
 
 			if (speed > minSpeed) 
