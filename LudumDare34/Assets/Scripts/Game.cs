@@ -14,8 +14,9 @@ public class Game : MonoBehaviour
     public Text scoreText;
 	public Text messageText;
 	public List<string> messageList;
-//    public Text highScoreText;
-//    public GameObject gameOverPanel;
+    public Text lastScoreText;
+	public Text highScoreText;
+    public GameObject gameOverPanel;
 
     private Command buttonLeft;
     private Command buttonRight;
@@ -44,12 +45,15 @@ public class Game : MonoBehaviour
 
     void Update() 
 	{
-	#if UNITY_ANDROID || UNITY_IOS
-		HandleMobileInput();
-	#else
-		HandleDesktopInput();
-	#endif
-		SpawnFood();
+		if (!gameOver)
+		{
+		#if UNITY_ANDROID || UNITY_IOS
+			HandleMobileInput();
+		#else
+			HandleDesktopInput();
+		#endif
+			SpawnFood();
+		}
     }
 
 	private void HandleMobileInput() 
@@ -177,14 +181,16 @@ public class Game : MonoBehaviour
         if (!gameOver)
         {
             gameOver = true;
-
             PauseGame();
-            //gameOverPanel.SetActive(true);
 
             if (currentScore > PlayerPrefs.GetInt("HighScore"))
             {
                 PlayerPrefs.SetInt("HighScore", currentScore);
             }
+
+			gameOverPanel.SetActive(true);
+			lastScoreText.text = lastScoreText.text + currentScore;
+			highScoreText.text = highScoreText.text + PlayerPrefs.GetInt("HighScore");
         }
     }
 }
