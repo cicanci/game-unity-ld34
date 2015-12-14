@@ -30,7 +30,7 @@ public class Spock : Character
 				Game.instance.ShowMessage("Too big! Game Over!", Color.red);
 				Game.instance.GameOver();
 			}
-			else if (spriteSize.x > Screen.width * 0.35f)
+			else if (spriteSize.x > Screen.width * 0.3f)
 			{
 				Game.instance.ShowMessage("Its growing...", Color.yellow);
 				enableRotation = true;
